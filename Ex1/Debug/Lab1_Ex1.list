@@ -126,6 +126,7 @@ int main(void)
 	  HAL_Delay (2000) ;
  8000170:	f44f 60fa 	mov.w	r0, #2000	; 0x7d0
  8000174:	f000 f96e 	bl	8000454 <HAL_Delay>
+
 	  HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,
  8000178:	2201      	movs	r2, #1
  800017a:	2120      	movs	r1, #32
@@ -138,7 +139,7 @@ int main(void)
  8000186:	4804      	ldr	r0, [pc, #16]	; (8000198 <main+0x4c>)
  8000188:	f000 fbe6 	bl	8000958 <HAL_GPIO_WritePin>
 	  GPIO_PIN_RESET );
-	  HAL_Delay (2000) ;
+	  HAL_Delay (2000);
  800018c:	f44f 60fa 	mov.w	r0, #2000	; 0x7d0
  8000190:	f000 f960 	bl	8000454 <HAL_Delay>
 	  HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,
