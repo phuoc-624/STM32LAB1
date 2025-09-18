@@ -42,7 +42,10 @@
 /* Private variables ---------------------------------------------------------*/
 
 /* USER CODE BEGIN PV */
-
+uint16_t led[12] = {GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7,
+					GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
+					GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
+int num = 4;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -54,7 +57,11 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-
+void test_ex6(int num);
+void clearAllClock ();
+void setNumberOnClock(int num);
+void clearNumberOnClock(int num);
+void setTimer(int hour, int minute, int sec);
 /* USER CODE END 0 */
 
 /**
@@ -91,18 +98,16 @@ int main(void)
 
   /* Infinite loop */
   /* USER CODE BEGIN WHILE */
+  clearAllClock();
   while (1)
   {
-	  /*HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,
-	  GPIO_PIN_RESET );
-	  HAL_GPIO_WritePin ( LED_YELLOW_GPIO_Port , LED_YELLOW_Pin ,
-	  GPIO_PIN_SET );
-	  HAL_Delay (2000) ;
-	  HAL_GPIO_WritePin ( LED_RED_GPIO_Port , LED_RED_Pin ,
-	  GPIO_PIN_SET );
-	  HAL_GPIO_WritePin ( LED_YELLOW_GPIO_Port , LED_YELLOW_Pin ,
-	  GPIO_PIN_RESET );
-	  HAL_Delay (2000);*/
+	  // Ex6
+	  /*test_ex6(num);
+	  num++;
+	  if (num > 11) num = 0;
+	  HAL_Delay(1000);*/
+	  setNumberOnClock(num);
+
 
     /* USER CODE END WHILE */
 
@@ -177,7 +182,40 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-
+void test_ex6(int num)
+{
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7
+	                         |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+	                         |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_SET);
+	if (num < 0 || num > 11) return;
+	HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_RESET);
+}
+void clearAllClock ()
+{
+	HAL_GPIO_WritePin(GPIOA, GPIO_PIN_4|GPIO_PIN_5|GPIO_PIN_6|GPIO_PIN_7
+		                     |GPIO_PIN_8|GPIO_PIN_9|GPIO_PIN_10|GPIO_PIN_11
+		                     |GPIO_PIN_12|GPIO_PIN_13|GPIO_PIN_14|GPIO_PIN_15, GPIO_PIN_SET);
+}
+void setNumberOnClock(int num)
+{
+	if (num >= 12 || num < 0) return;
+	HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_RESET);
+}
+void clearNumberOnClock(int num)
+{
+	if (num >= 12 || num < 0) return;
+	HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_SET);
+}
+void setTimer(int hour, int minute, int sec)
+{
+	if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || sec < 0 || sec >= 60) return;
+	int h = hour > 11 ? hour - 12 : hour;
+	int m = m / 5;
+	int sec = sec / 5;
+	setNumberOnClock(h);
+	setNumberOnClock(m);
+	setNumberOnClock(s);
+}
 /* USER CODE END 4 */
 
 /**
