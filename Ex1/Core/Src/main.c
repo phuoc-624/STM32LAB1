@@ -46,6 +46,9 @@ uint16_t led[12] = {GPIO_PIN_4, GPIO_PIN_5, GPIO_PIN_6, GPIO_PIN_7,
 					GPIO_PIN_8, GPIO_PIN_9, GPIO_PIN_10, GPIO_PIN_11,
 					GPIO_PIN_12, GPIO_PIN_13, GPIO_PIN_14, GPIO_PIN_15};
 int num = 4;
+int gio = 0;
+int phut = 0;
+int giay = 0;
 /* USER CODE END PV */
 
 /* Private function prototypes -----------------------------------------------*/
@@ -101,12 +104,30 @@ int main(void)
   clearAllClock();
   while (1)
   {
+	  if (giay >= 60)
+	  {
+		  giay = 0;
+		  phut += 1;
+	  }
+	  if (phut >= 60)
+	  {
+		  phut = 0;
+		  gio += 1;
+	  }
+	  if (gio >= 24) gio = 0;
+	  clearAllClock();
+	  setNumberOnClock(giay / 5);
+	  setNumberOnClock(phut / 5);
+	  setNumberOnClock(gio % 12);
+	  HAL_Delay(1000);
+	  giay += 1;
+	  //setTimer(11, 59, 59);
 	  // Ex6
 	  /*test_ex6(num);
 	  num++;
 	  if (num > 11) num = 0;
 	  HAL_Delay(1000);*/
-	  setNumberOnClock(num);
+	  //setNumberOnClock(num);
 
 
     /* USER CODE END WHILE */
@@ -206,12 +227,12 @@ void clearNumberOnClock(int num)
 	if (num >= 12 || num < 0) return;
 	HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_SET);
 }
-void setTimer(int hour, int minute, int sec)
+void TimerClock(int hour, int minute, int sec)
 {
 	if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || sec < 0 || sec >= 60) return;
 	int h = hour > 11 ? hour - 12 : hour;
-	int m = m / 5;
-	int sec = sec / 5;
+	int m = minute / 5;
+	int s = sec / 5;
 	setNumberOnClock(h);
 	setNumberOnClock(m);
 	setNumberOnClock(s);
