@@ -64,7 +64,6 @@ void test_ex6(int num);
 void clearAllClock ();
 void setNumberOnClock(int num);
 void clearNumberOnClock(int num);
-void setTimer(int hour, int minute, int sec);
 /* USER CODE END 0 */
 
 /**
@@ -121,7 +120,6 @@ int main(void)
 	  setNumberOnClock(gio % 12);
 	  HAL_Delay(1000);
 	  giay += 1;
-	  //setTimer(11, 59, 59);
 	  // Ex6
 	  /*test_ex6(num);
 	  num++;
@@ -227,16 +225,7 @@ void clearNumberOnClock(int num)
 	if (num >= 12 || num < 0) return;
 	HAL_GPIO_WritePin(GPIOA, led[num], GPIO_PIN_SET);
 }
-void TimerClock(int hour, int minute, int sec)
-{
-	if (hour < 0 || hour >= 24 || minute < 0 || minute >= 60 || sec < 0 || sec >= 60) return;
-	int h = hour > 11 ? hour - 12 : hour;
-	int m = minute / 5;
-	int s = sec / 5;
-	setNumberOnClock(h);
-	setNumberOnClock(m);
-	setNumberOnClock(s);
-}
+
 /* USER CODE END 4 */
 
 /**
