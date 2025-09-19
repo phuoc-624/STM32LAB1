@@ -27,23 +27,23 @@ Idx Name          Size      VMA       LMA       File off  Algn
                   ALLOC
  11 .ARM.attributes 00000029  00000000  00000000  0002001c  2**0
                   CONTENTS, READONLY
- 12 .debug_info   0000308a  00000000  00000000  00020045  2**0
+ 12 .debug_info   000030d9  00000000  00000000  00020045  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 13 .debug_abbrev 00000ee1  00000000  00000000  000230cf  2**0
+ 13 .debug_abbrev 00000ee1  00000000  00000000  0002311e  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 14 .debug_aranges 000003d8  00000000  00000000  00023fb0  2**3
+ 14 .debug_aranges 000003e0  00000000  00000000  00024000  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 15 .debug_ranges 00000350  00000000  00000000  00024388  2**3
+ 15 .debug_ranges 00000358  00000000  00000000  000243e0  2**3
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 16 .debug_macro  0001562c  00000000  00000000  000246d8  2**0
+ 16 .debug_macro  0001562c  00000000  00000000  00024738  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 17 .debug_line   00004666  00000000  00000000  00039d04  2**0
+ 17 .debug_line   000046c9  00000000  00000000  00039d64  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 18 .debug_str    00079b68  00000000  00000000  0003e36a  2**0
+ 18 .debug_str    00079b79  00000000  00000000  0003e42d  2**0
                   CONTENTS, READONLY, DEBUGGING, OCTETS
- 19 .comment      00000053  00000000  00000000  000b7ed2  2**0
+ 19 .comment      00000053  00000000  00000000  000b7fa6  2**0
                   CONTENTS, READONLY
- 20 .debug_frame  00000d50  00000000  00000000  000b7f28  2**2
+ 20 .debug_frame  00000d74  00000000  00000000  000b7ffc  2**2
                   CONTENTS, READONLY, DEBUGGING, OCTETS
 
 Disassembly of section .text:
@@ -123,12 +123,12 @@ int main(void)
  800016a:	2b00      	cmp	r3, #0
  800016c:	dd6f      	ble.n	800024e <main+0x102>
 		  {
-			  display7SEG(timeRed, GPIO_PIN_7);
+			  display7SEG_2way(timeRed, GPIO_PIN_7);
  800016e:	4b8e      	ldr	r3, [pc, #568]	; (80003a8 <main+0x25c>)
  8000170:	681b      	ldr	r3, [r3, #0]
  8000172:	2180      	movs	r1, #128	; 0x80
  8000174:	4618      	mov	r0, r3
- 8000176:	f000 f9b1 	bl	80004dc <display7SEG>
+ 8000176:	f000 f9b1 	bl	80004dc <display7SEG_2way>
 			  if (timeRed >= 3)
  800017a:	4b8b      	ldr	r3, [pc, #556]	; (80003a8 <main+0x25c>)
  800017c:	681b      	ldr	r3, [r3, #0]
@@ -166,12 +166,12 @@ int main(void)
  80001bc:	2180      	movs	r1, #128	; 0x80
  80001be:	487b      	ldr	r0, [pc, #492]	; (80003ac <main+0x260>)
  80001c0:	f000 fd36 	bl	8000c30 <HAL_GPIO_WritePin>
-				  display7SEG(timeGreen, GPIO_PIN_0);
+				  display7SEG_2way(timeGreen, GPIO_PIN_0);
  80001c4:	4b7a      	ldr	r3, [pc, #488]	; (80003b0 <main+0x264>)
  80001c6:	681b      	ldr	r3, [r3, #0]
  80001c8:	2101      	movs	r1, #1
  80001ca:	4618      	mov	r0, r3
- 80001cc:	f000 f986 	bl	80004dc <display7SEG>
+ 80001cc:	f000 f986 	bl	80004dc <display7SEG_2way>
 				  timeGreen -= 1;
  80001d0:	4b77      	ldr	r3, [pc, #476]	; (80003b0 <main+0x264>)
  80001d2:	681b      	ldr	r3, [r3, #0]
@@ -221,12 +221,12 @@ int main(void)
  8000226:	2180      	movs	r1, #128	; 0x80
  8000228:	4860      	ldr	r0, [pc, #384]	; (80003ac <main+0x260>)
  800022a:	f000 fd01 	bl	8000c30 <HAL_GPIO_WritePin>
-				  display7SEG(timeYellow, GPIO_PIN_0);
+				  display7SEG_2way(timeYellow, GPIO_PIN_0);
  800022e:	4b61      	ldr	r3, [pc, #388]	; (80003b4 <main+0x268>)
  8000230:	681b      	ldr	r3, [r3, #0]
  8000232:	2101      	movs	r1, #1
  8000234:	4618      	mov	r0, r3
- 8000236:	f000 f951 	bl	80004dc <display7SEG>
+ 8000236:	f000 f951 	bl	80004dc <display7SEG_2way>
 				  timeYellow -= 1;
  800023a:	4b5e      	ldr	r3, [pc, #376]	; (80003b4 <main+0x268>)
  800023c:	681b      	ldr	r3, [r3, #0]
@@ -282,12 +282,12 @@ int main(void)
  8000286:	2b00      	cmp	r3, #0
  8000288:	dd6f      	ble.n	800036a <main+0x21e>
 		  {
-			  display7SEG(timeRed, GPIO_PIN_0);
+			  display7SEG_2way(timeRed, GPIO_PIN_0);
  800028a:	4b47      	ldr	r3, [pc, #284]	; (80003a8 <main+0x25c>)
  800028c:	681b      	ldr	r3, [r3, #0]
  800028e:	2101      	movs	r1, #1
  8000290:	4618      	mov	r0, r3
- 8000292:	f000 f923 	bl	80004dc <display7SEG>
+ 8000292:	f000 f923 	bl	80004dc <display7SEG_2way>
 			  if (timeRed >= 3)
  8000296:	4b44      	ldr	r3, [pc, #272]	; (80003a8 <main+0x25c>)
  8000298:	681b      	ldr	r3, [r3, #0]
@@ -325,12 +325,12 @@ int main(void)
  80002d6:	f44f 6180 	mov.w	r1, #1024	; 0x400
  80002da:	4834      	ldr	r0, [pc, #208]	; (80003ac <main+0x260>)
  80002dc:	f000 fca8 	bl	8000c30 <HAL_GPIO_WritePin>
-				  display7SEG(timeGreen, GPIO_PIN_7);
+				  display7SEG_2way(timeGreen, GPIO_PIN_7);
  80002e0:	4b33      	ldr	r3, [pc, #204]	; (80003b0 <main+0x264>)
  80002e2:	681b      	ldr	r3, [r3, #0]
  80002e4:	2180      	movs	r1, #128	; 0x80
  80002e6:	4618      	mov	r0, r3
- 80002e8:	f000 f8f8 	bl	80004dc <display7SEG>
+ 80002e8:	f000 f8f8 	bl	80004dc <display7SEG_2way>
 				  timeGreen -= 1;
  80002ec:	4b30      	ldr	r3, [pc, #192]	; (80003b0 <main+0x264>)
  80002ee:	681b      	ldr	r3, [r3, #0]
@@ -380,12 +380,12 @@ int main(void)
  8000340:	f44f 6180 	mov.w	r1, #1024	; 0x400
  8000344:	4819      	ldr	r0, [pc, #100]	; (80003ac <main+0x260>)
  8000346:	f000 fc73 	bl	8000c30 <HAL_GPIO_WritePin>
-				  display7SEG(timeYellow, GPIO_PIN_7);
+				  display7SEG_2way(timeYellow, GPIO_PIN_7);
  800034a:	4b1a      	ldr	r3, [pc, #104]	; (80003b4 <main+0x268>)
  800034c:	681b      	ldr	r3, [r3, #0]
  800034e:	2180      	movs	r1, #128	; 0x80
  8000350:	4618      	mov	r0, r3
- 8000352:	f000 f8c3 	bl	80004dc <display7SEG>
+ 8000352:	f000 f8c3 	bl	80004dc <display7SEG_2way>
 		  		  timeYellow -= 1;
  8000356:	4b17      	ldr	r3, [pc, #92]	; (80003b4 <main+0x268>)
  8000358:	681b      	ldr	r3, [r3, #0]
@@ -646,12 +646,12 @@ static void MX_GPIO_Init(void)
  80004d4:	40010800 	.word	0x40010800
  80004d8:	40010c00 	.word	0x40010c00
 
-080004dc <display7SEG>:
+080004dc <display7SEG_2way>:
 	for (int i = 0; i < 7; i++)
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 << i, (segNumber[num] >> i) & 1);
-}*/
+}
 
-void display7SEG(int num, uint32_t GPIO_Pin)
+void display7SEG_2way(int num, uint32_t GPIO_Pin)
 {
  80004dc:	b580      	push	{r7, lr}
  80004de:	b086      	sub	sp, #24
@@ -661,12 +661,12 @@ void display7SEG(int num, uint32_t GPIO_Pin)
 	if(num < 0 || num > 9) return;
  80004e6:	687b      	ldr	r3, [r7, #4]
  80004e8:	2b00      	cmp	r3, #0
- 80004ea:	db28      	blt.n	800053e <display7SEG+0x62>
+ 80004ea:	db28      	blt.n	800053e <display7SEG_2way+0x62>
  80004ec:	687b      	ldr	r3, [r7, #4]
  80004ee:	2b09      	cmp	r3, #9
- 80004f0:	dc25      	bgt.n	800053e <display7SEG+0x62>
+ 80004f0:	dc25      	bgt.n	800053e <display7SEG_2way+0x62>
 	char segNumber[10] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90};
- 80004f2:	4a15      	ldr	r2, [pc, #84]	; (8000548 <display7SEG+0x6c>)
+ 80004f2:	4a15      	ldr	r2, [pc, #84]	; (8000548 <display7SEG_2way+0x6c>)
  80004f4:	f107 0308 	add.w	r3, r7, #8
  80004f8:	ca07      	ldmia	r2, {r0, r1, r2}
  80004fa:	c303      	stmia	r3!, {r0, r1}
@@ -674,7 +674,7 @@ void display7SEG(int num, uint32_t GPIO_Pin)
 	for (int i = 0; i < 7; i++)
  80004fe:	2300      	movs	r3, #0
  8000500:	617b      	str	r3, [r7, #20]
- 8000502:	e018      	b.n	8000536 <display7SEG+0x5a>
+ 8000502:	e018      	b.n	8000536 <display7SEG_2way+0x5a>
 	HAL_GPIO_WritePin(GPIOB, GPIO_Pin << i, (segNumber[num] >> i) & 1);
  8000504:	683a      	ldr	r2, [r7, #0]
  8000506:	697b      	ldr	r3, [r7, #20]
@@ -691,7 +691,7 @@ void display7SEG(int num, uint32_t GPIO_Pin)
  8000522:	f003 0301 	and.w	r3, r3, #1
  8000526:	b2db      	uxtb	r3, r3
  8000528:	461a      	mov	r2, r3
- 800052a:	4808      	ldr	r0, [pc, #32]	; (800054c <display7SEG+0x70>)
+ 800052a:	4808      	ldr	r0, [pc, #32]	; (800054c <display7SEG_2way+0x70>)
  800052c:	f000 fb80 	bl	8000c30 <HAL_GPIO_WritePin>
 	for (int i = 0; i < 7; i++)
  8000530:	697b      	ldr	r3, [r7, #20]
@@ -699,8 +699,8 @@ void display7SEG(int num, uint32_t GPIO_Pin)
  8000534:	617b      	str	r3, [r7, #20]
  8000536:	697b      	ldr	r3, [r7, #20]
  8000538:	2b06      	cmp	r3, #6
- 800053a:	dde3      	ble.n	8000504 <display7SEG+0x28>
- 800053c:	e000      	b.n	8000540 <display7SEG+0x64>
+ 800053a:	dde3      	ble.n	8000504 <display7SEG_2way+0x28>
+ 800053c:	e000      	b.n	8000540 <display7SEG_2way+0x64>
 	if(num < 0 || num > 9) return;
  800053e:	bf00      	nop
 }

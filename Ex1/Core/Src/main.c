@@ -57,8 +57,8 @@ static void MX_GPIO_Init(void);
 
 /* Private user code ---------------------------------------------------------*/
 /* USER CODE BEGIN 0 */
-//void display7SEG(int num);
-void display7SEG(int num, uint32_t GPIO_Pin);
+void display7SEG(int num);
+void display7SEG_2way(int num, uint32_t GPIO_Pin);
 /* USER CODE END 0 */
 
 /**
@@ -101,7 +101,7 @@ int main(void)
 	  {
 		  if (timeRed > 0)
 		  {
-			  display7SEG(timeRed, GPIO_PIN_7);
+			  display7SEG_2way(timeRed, GPIO_PIN_7);
 			  if (timeRed >= 3)
 			  {
 				  HAL_GPIO_WritePin(LED_RED2_GPIO_Port, LED_RED2_Pin, GPIO_PIN_RESET);
@@ -111,7 +111,7 @@ int main(void)
 				  HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, GPIO_PIN_SET);
 				  HAL_GPIO_WritePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, GPIO_PIN_SET);
 				  HAL_GPIO_WritePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, GPIO_PIN_RESET);
-				  display7SEG(timeGreen, GPIO_PIN_0);
+				  display7SEG_2way(timeGreen, GPIO_PIN_0);
 				  timeGreen -= 1;
 			  }
 			  else if (timeRed < 3 && timeRed >= 1)
@@ -123,7 +123,7 @@ int main(void)
 				  HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, GPIO_PIN_SET);
 				  HAL_GPIO_WritePin(LED_YELLOW1_GPIO_Port, LED_YELLOW1_Pin, GPIO_PIN_RESET);
 				  HAL_GPIO_WritePin(LED_GREEN1_GPIO_Port, LED_GREEN1_Pin, GPIO_PIN_SET);
-				  display7SEG(timeYellow, GPIO_PIN_0);
+				  display7SEG_2way(timeYellow, GPIO_PIN_0);
 				  timeYellow -= 1;
 			  }
 			  timeRed -= 1;
@@ -140,7 +140,7 @@ int main(void)
 	  {
 		  if (timeRed > 0)
 		  {
-			  display7SEG(timeRed, GPIO_PIN_0);
+			  display7SEG_2way(timeRed, GPIO_PIN_0);
 			  if (timeRed >= 3)
 			  {
 				  HAL_GPIO_WritePin(LED_RED1_GPIO_Port, LED_RED1_Pin, GPIO_PIN_RESET);
@@ -150,7 +150,7 @@ int main(void)
 				  HAL_GPIO_WritePin(LED_RED2_GPIO_Port, LED_RED2_Pin, GPIO_PIN_SET);
 				  HAL_GPIO_WritePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, GPIO_PIN_SET);
 				  HAL_GPIO_WritePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, GPIO_PIN_RESET);
-				  display7SEG(timeGreen, GPIO_PIN_7);
+				  display7SEG_2way(timeGreen, GPIO_PIN_7);
 				  timeGreen -= 1;
 			  }
 			  else if (timeRed < 3 && timeRed >= 1)
@@ -162,7 +162,7 @@ int main(void)
 				  HAL_GPIO_WritePin(LED_RED2_GPIO_Port, LED_RED2_Pin, GPIO_PIN_SET);
 		  		  HAL_GPIO_WritePin(LED_YELLOW2_GPIO_Port, LED_YELLOW2_Pin, GPIO_PIN_RESET);
 				  HAL_GPIO_WritePin(LED_GREEN2_GPIO_Port, LED_GREEN2_Pin, GPIO_PIN_SET);
-				  display7SEG(timeYellow, GPIO_PIN_7);
+				  display7SEG_2way(timeYellow, GPIO_PIN_7);
 		  		  timeYellow -= 1;
 			  }
 			  timeRed -= 1;
@@ -266,15 +266,15 @@ static void MX_GPIO_Init(void)
 }
 
 /* USER CODE BEGIN 4 */
-/*void display7SEG(int num)
+void display7SEG(int num)
 {
 	if(num < 0 || num > 9) return;
 	char segNumber[10] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90};
 	for (int i = 0; i < 7; i++)
 	HAL_GPIO_WritePin(GPIOB, GPIO_PIN_0 << i, (segNumber[num] >> i) & 1);
-}*/
+}
 
-void display7SEG(int num, uint32_t GPIO_Pin)
+void display7SEG_2way(int num, uint32_t GPIO_Pin)
 {
 	if(num < 0 || num > 9) return;
 	char segNumber[10] = {0xC0, 0xF9, 0xA4, 0xB0, 0x99, 0x92, 0x82, 0xF8, 0x80, 0x90};
