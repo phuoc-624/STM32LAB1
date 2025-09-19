@@ -105,26 +105,32 @@ int main(void)
   {
 	  if (giay >= 60)
 	  {
+		  clearNumberOnClock((giay / 5) - 1);
 		  giay = 0;
 		  phut += 1;
 	  }
+	  else if (giay % 5 == 0 && giay != 0) clearNumberOnClock((giay / 5) - 1);
 	  if (phut >= 60)
 	  {
+		  clearNumberOnClock((phut / 5) - 1);
 		  phut = 0;
+		  clearNumberOnClock(gio % 12);
 		  gio += 1;
 	  }
+	  else if (phut % 5 == 0 && phut != 0) clearNumberOnClock((phut / 5) - 1);
 	  if (gio >= 24) gio = 0;
-	  clearAllClock();
 	  setNumberOnClock(giay / 5);
 	  setNumberOnClock(phut / 5);
 	  setNumberOnClock(gio % 12);
-	  HAL_Delay(1000);
+	  HAL_Delay(5);
 	  giay += 1;
 	  // Ex6
 	  /*test_ex6(num);
 	  num++;
 	  if (num > 11) num = 0;
 	  HAL_Delay(1000);*/
+	  //HAL_Delay(5000);
+	  //clearAllClock();
 	  //setNumberOnClock(num);
 
 
