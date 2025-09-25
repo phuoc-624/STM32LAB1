@@ -103,6 +103,7 @@ int main(void)
   clearAllClock();
   while (1)
   {
+	  //Ex8_9_10
 	  if (giay >= 60)
 	  {
 		  clearNumberOnClock((giay / 5) - 1);
@@ -124,15 +125,16 @@ int main(void)
 	  setNumberOnClock(gio % 12);
 	  HAL_Delay(5);
 	  giay += 1;
+
 	  // Ex6
 	  /*test_ex6(num);
 	  num++;
 	  if (num > 11) num = 0;
 	  HAL_Delay(1000);*/
-	  //HAL_Delay(5000);
-	  //clearAllClock();
-	  //setNumberOnClock(num);
 
+	  //Ex7
+	  /*HAL_Delay(5000);
+	  clearAllClock();*/
 
     /* USER CODE END WHILE */
 

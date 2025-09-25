@@ -115,6 +115,7 @@ int main(void)
  800015c:	f000 f92e 	bl	80003bc <clearAllClock>
   while (1)
   {
+	  //Ex8_9_10
 	  if (giay >= 60)
  8000160:	4b59      	ldr	r3, [pc, #356]	; (80002c8 <main+0x17c>)
  8000162:	681b      	ldr	r3, [r3, #0]
